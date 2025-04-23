@@ -1,0 +1,51 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block 'content' %}
+<div class="container">
+    <h1 class="text-center mb-3"><b>Sign Up</b></h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8 text-align">
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <form method="post" action="../usersignup">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            <input type="text" name="email" placeholder="Email" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" name="first_name" placeholder="First Name" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" name="last_name" placeholder="Last Name" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="number" name="contact" placeholder="Contact" class="form-control" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <input type="password" name="pwd1" placeholder="Password" class="form-control" required>
+
+                        </div>
+                    
+                        <div class="form-group mb-3">
+                            <input type="password" name="pwd2" placeholder="Confirm Password" class="form-control">
+                        </div>
+                        <div class="form-group mb-3">
+                            <a href="../"><input type='submit' class="form-control btn btn-primary " value='Signup'></a>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <span><b>Already Have An Account </b><a href="../userlogin">LOG IN</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+        
+    </div>
+</div>
+{% endblock %}

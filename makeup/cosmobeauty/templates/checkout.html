@@ -1,0 +1,108 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block 'content' %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        
+        <form id="checkout-form" method="post" action="../checkout">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-lg-8">
+                    <section>
+                        <h1 class="mb-5">Billing Information</h1>
+                        
+                        <div class="form-group mb-3">
+                            <input type="text" id="first_name" name="first_name"  class="form-control" placeholder="First Name" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" id="last_name" name="last_name"  class="form-control" placeholder="Last Name" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="number" id="contact" name="contact"  class="form-control" placeholder="Contact" required>
+                        </div>
+                        <div class="form-group mb-3">
+                        
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            
+                            <input type="text" id="address" name="address" class="form-control" placeholder="Address" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            
+                            <input type="text" id="city" name="city" class="form-control" placeholder="City" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            
+                            <input type="text" id="landmark" name="landmark" class="form-control" placeholder="Landmark">
+                        </div>
+                        <div class="form-group mb-3">
+                            
+                            <input type="text" id="state" name="state" class="form-control" placeholder="State" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            
+                            <input type="text" id="zipcode" name="zipcode" class="form-control" placeholder="Zip Code" required>
+                        </div>
+                    </section>
+                </div>
+            
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-header bg-dark text-white">
+                                <h2 class="text-center">Your Order</h2>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div><h5>Product</h5> </div>
+                                        {% for cr in cart %}
+                                            <input type="hidden" id="price{{cr.id}}" value="{{cr.product.price}}">
+                                            <input type="hidden" id="qty{{cr.id}}" value="{{cr.qty}}">
+                                            <p>{{cr.product.name}} X {{cr.qty}}</p>
+                                    
+                                           
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div><h5>Price</h5></div>
+                                        {% for cr in cart %}
+                                            <h6><span id="total{{cr.id}}"></span></h6>
+                                            <script>
+                                            
+                                                $(function() {
+                                                    var mrp =parseInt($('#price{{cr.id}}').val())
+                                                    var qty= parseInt($("#qty{{cr.id}}").val())
+                                                    var total=mrp *qty
+                                                    
+                                                    $("#total").text(total)
+                                                })
+                                            </script>
+                                        {% endfor %}
+                                    </div>
+                                    <div ><h5 >Total: $ <span> {{total}}</span></h5></div>
+                                    <div ><h5>Shipping: $<span> {{shipc}}</span></h5></div><hr>
+                                    <div ><h4 class="text-danger">Net Amount: $ <span> {{net}}</span></h4></div>
+                                    <input type="hidden" name="amount" value="{{net}}">
+                                    <hr>
+                                    <h5>Payment Mode</h5>
+                                    <span><input type="radio" name="pay" value="COD">   Cash on Delivery</span> 
+                                    <span><input type="radio" name="pay" value="Online">  UPI/Online Payment</span>
+                                </div>
+                                    
+                            </div>
+                            <hr>
+                            <input type="hidden" name="orderid" value="{{orderid}}">
+                            <input class="btn btn-dark text-white btn-lg mb-3" type="submit" name="placeorder"  value="PLACE ORDER">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

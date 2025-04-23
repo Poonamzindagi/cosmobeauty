@@ -1,0 +1,154 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block 'content' %}
+
+<!-- product details -->
+<div class="container mt-5 mb-5">
+    <div class="row">
+        
+        <div class="col-lg-6 text-center">
+            
+            <a href="#"><img src="{{product.img.url}}" class="detailsize"> <div class="detail-o"> </div></a>
+        </div>
+        <div class="col-lg-6">
+            <span class="side" id="wishlist{{product.id}}" ><i class="fa-regular fa-heart colorc" id="heart{{product.id}}"></i></span>
+            <script>
+                $(document).ready(function() {
+
+                    if (localStorage.getItem('heart{{product.id}}') === 'true') {
+                        $('#heart{{product.id}}').addClass('active');
+                    }
+                    $('#heart{{product.id}}').click(function() {
+                        $(this).toggleClass('active');
+
+                        if ($(this).hasClass('active')) {
+                           
+                            localStorage.setItem('heart{{product.id}}', 'true');
+                        } else {
+                            localStorage.setItem('heart{{product.id}}', 'false');
+                        }
+                    });
+                });
+            </script>
+
+            <h1><b>{{product.title}}</b></h1><br>
+        
+            <h3>$<span>{{product.price}}</span></h3><br>
+           
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-dark" id="qtyde{{product.id}}">-</button>
+                <input type="text" value="1" id="qty" class="text-center inputsize" readonly>
+                <button type="button" class="btn btn-dark" id="qtyin{{product.id}}">+</button>
+            </div>
+            <span class="btn btn-dark" id="add{{product.id}}">Add To Cart</span>
+            <input type="hidden" id="{{product.id}}">
+            <br>
+            <br>
+            <h3>Details</h3>
+            <p>{{product.description}}</p>
+        </div>
+        <script>
+            $(function (){
+                $('#wishlist{{product.id}}').click(function(){
+                    product='{{product.id}}'
+                    
+                    $.ajax({
+                        url:'../wishlist',
+                    
+                        data:{product:product},
+                        success:function(res){
+                            alert(res)
+                           
+                            window.location.reload()
+                        }
+                    })
+                })
+            })
+        </script>
+        
+        
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-lg-3" data-aos="fade-right">
+            <h1>RELATED PRODUCTS</h1>
+        </div>
+        <div class="col-lg-9">
+            <div class="row">
+                {% for p in showproducts %}
+                <div class="card card1 me-3 " data-aos="fade-left" >
+                    <a href="../product/{{p.id}}"><img src="{{p.img.url}}" class="card-img-top imgfix"></a>
+                    <div class="card-body ">
+                        <p class="card-text">{{p.name}}</p>
+                    </div>
+                    <div class="overlay mb-2">
+                        <span><b>{{p.name}}</b></span>
+                        <div>$<span>{{p.price}}</span></div>
+                            <div class="card-space">
+                                <span class="btn btn-dark btn-sm text-white" id="add{{p.id}}">Add to cart</span>
+                                <input type="hidden" id="{{p.product.id}}">
+                                
+                            </div>
+                    </div> 
+                    
+                </div> 
+                <script>
+                    $(function (){
+                
+                        $('#add{{p.id}}').click(function (){
+                            var qty= $('#qty').val()
+                            var product='{{p.product.id}}'
+                            $.ajax({
+                                url: '../addtocart' ,
+                                data: {qty:qty,product:product} ,
+                                success: function(res){
+                                    alert(res)
+                                }
+                
+                            })
+                        })
+                    })
+                </script>   
+                {% endfor %}
+            </div>
+        </div>
+    
+    
+
+    </div>
+</div>
+<script>
+    $(function (){
+        $('#qtyin{{product.id}}').click(function () {
+            let Qty = parseInt($('#qty').val());
+            Qty+=1
+            $('#qty').val(Qty);
+        });
+
+
+        $('#qtyde{{product.id}}').click(function () {
+            let Qty = parseInt($('#qty').val());
+            if (Qty > 1){
+                Qty-=1
+                $('#qty').val(Qty);
+            }
+        });
+
+        $('#add{{product.id}}').click(function (){
+            var qty= $('#qty').val()
+            var product='{{product.id}}'
+            $.ajax({
+                url: '../addtocart' ,
+                data: {qty:qty,product:product} ,
+                success: function(res){
+                    alert(res)
+                    window.location.reload()
+                }
+
+            })
+        })
+    })
+</script>
+{% endblock %}

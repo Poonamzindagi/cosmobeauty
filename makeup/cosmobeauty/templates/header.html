@@ -1,0 +1,529 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CosmoBeauty</title>
+    <link href="{% static 'css/boots.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <script src="{% static 'js/jquery.js' %}"></script>    
+
+    <style>
+        /* From heading NEW COLLECTION */
+        .home-img {
+            height: auto;
+            width: 400px;
+
+        }
+
+        .home-img:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        /* Banner1 */
+
+        /* End Heading */
+        .card1 {
+
+            width: 300px;
+            height: auto;
+            object-fit: cover;
+            padding: 10px;
+        }
+
+        /* Fix the image size in the category and the products */
+        .imgfix {
+            width: 280px;
+            height: 280px;
+            padding: 10px;
+
+
+        }
+
+        /* .imgfix:hover{
+           background-image: url(lipstick.png); 
+        } */
+
+        /* End fixing */
+        /* FOR Banner1  */
+        .imgsize {
+            width: 100%;
+            height: 600px;
+            border-radius: 10px;
+        }
+
+        .imgsize1 {
+            width: 100%;
+            height: 800px;
+        }
+
+        .sec1 {
+            position: relative;
+            text-align: left;
+            color: white;
+
+        }
+
+        .pro {
+            position: absolute;
+            top: 200px;
+            left: 16px;
+
+        }
+
+        /* End Banner 1 */
+        /*  Recommended section */
+        .card2 {
+            width: 250px;
+            height: auto;
+            object-fit: cover;
+
+        }
+
+        /* .overlay{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+           
+        } */
+        .sec2 {
+            position: relative;
+            text-align: left;
+            color: white;
+
+        }
+
+        .pro2 {
+            position: absolute;
+            top: 50px;
+            right: 500px;
+        }
+
+        .sec2:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        /* End Recommended */
+
+        .banner4 {
+            width: 600px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .model {
+
+            text-align: center;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 10000;
+        }
+
+        .modal-overlay {
+            display: none;
+            /* display: flex; */
+
+            /* display: flex; */
+            align-items: center;
+            justify-content: center;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+
+        }
+
+        .body-m {
+            overflow: hidden;
+        }
+
+        .banner {
+            position: relative;
+            border-radius: 10px;
+
+
+        }
+
+        .banneraligntext {
+            position: absolute;
+            top: 50px;
+            left: 530px;
+            background-color: black;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+
+        }
+
+        .txt {
+            text-decoration: none;
+            color: black;
+        }
+
+        .card-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+
+        .cardimg {
+            width: 200px;
+
+        }
+
+        .overlay {
+            position: absolute;
+            top: 60%;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            height: 40%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: white;
+            padding:30px;
+            
+
+        }
+
+        
+
+        .card1:hover .overlay {
+            opacity: 1;
+
+        }
+
+        .card-space {
+            display: flex;
+            justify-content: space-between;
+
+
+        }
+
+        .detailsize {
+            width: 500px;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .overdetail {
+            position: absolute;
+            opacity: 0;
+            transition: .5s ease;
+            top: 50px;
+            right: 50px;
+            height: 40%;
+            width: 100%;
+        }
+
+        .detail-o {
+            color: white;
+
+            position: absolute;
+            font-size: 25px;
+            top: 27%;
+            right: 57%;
+            cursor: pointer;
+            transition: .5s ease;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+
+        }
+
+        .detailsize :hover .detail-o {
+            opacity: 1;
+        }
+
+        .inputsize {
+            width: 50px;
+        }
+        .cartimg{
+            width:100px;
+            height:100px;
+        }
+        .dirside{
+            display: flex;
+            flex-direction: row;
+
+        }
+        .side{
+            display: flex;
+            justify-content: end;
+            font-size: 30px;
+            
+        }
+
+    
+        .bagsize{
+            font-size: 80px;
+        
+        }
+        
+        .colorc{
+            color: gray;
+            cursor: pointer;
+        }
+        .colorc.active{
+            color: red;
+        }
+        .btnsize{
+            display: flex;
+            justify-content: center;
+            
+            font-size: 20px;
+        }
+        .searchsize{
+            display: flex;
+            justify-content: center;
+            height: 40px;
+            width:800px;
+            
+            
+        }
+        .success{
+            padding:50px;
+        }
+    </style>
+</head>
+<!-- Header PART -->
+<div class="container ">
+    <h5 data-aos="zoomin"> Discount on Lipstick 💄10%</h5>
+</div>
+<nav class=" navbar navbar-dark bg-dark  ">
+    <a data-aos="fade-right" class=" navbar-brand text-white " href="../">
+        <h1 class="ps-4">CosmoBeauty</h1>
+    </a>
+    <ul class="nav justify-content-start">
+        <li class="nav-item">
+            <a href="../" class=" nav-link text-white">Home</a>
+        </li>
+        <li class="nav-item dropdown-center ">
+            <a href="../" class=" nav-link text-white dropdown-toggle" data-bs-toggle="dropdown" >Cosmetices</a>
+            <ul class="dropdown-menu " >
+                {% for c in acategory %}
+                    <li><a href="../categories/{{c.id}}" class="dropdown-item" ><b>{{c.name}}</b></a></li>
+                
+                {% endfor %}
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="../" class=" nav-link text-white">Discover</a>
+        </li>
+        
+    </ul>
+    <ul class="nav justify-content-end px-4">
+        <li class="nav-item p-3" > <a href="../wishlist" class="text-white" ><i class="fa-regular fa-heart" ></i></a></li>
+
+        <li class="nav-item p-3"><a href="../myorders" class="text-white"><i class="fa-solid fa-bag-shopping"></i></a></li>
+
+        <li class="nav-item p-3"><a href="../cart" class="text-white" data-bs-toggle="offcanvas" data-bs-target="#sideCart" onclick="openNav()"><i class="fa-solid fa-cart-shopping"></i> </a></li>
+
+        <li class="nav-item p-3"><a href="../search" class="text-white"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+        <li class="nav-item p-3">
+        {% if user.is_authenticated %}
+            <a  class="btn btn-outline-primary text-white dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-regular fa-user"></i> {{user.first_name}}</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><button class="dropdown-item" type="button">Username: <b>{{user.first_name}}</b></button></li>
+                
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item btn btn-danger" href="../userlogout">LOGOUT</a></li>
+            </ul>
+        {% else %}
+            <a href="../" class="text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+                class="fa-regular fa-user "></i></a>
+        {% endif %}
+        </li>
+    </ul>
+    <div class="modal fade" id="staticBackdrop">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <h1 class="text-center"><b>LOGIN</b></h1>
+                    <form action="../userlogin" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input class="form-control mb-3" type="text" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control mb-3" type="password" name="pwd1" placeholder="Password">
+                        </div>
+                        <div class="form-group text-center">
+                            <input class="  btn btn-primary form-control" type="submit" value="LOGIN">
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer text-center">
+
+                    <span class="text-center"><b>NEW USER?</b><a href="../usersignup">Sign Up</a></span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <!-- Offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="sideCart" aria-labelledby="sideCartLabel">
+        <div class="offcanvas-header">
+            <h5 id="sideCartLabel">Cart</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="container">    
+                {% if cart %}    
+                    {% for c in cart %}
+                        <div class="card dirside"> 
+                            <img src="{{c.product.img.url}}"  class="cartimg text-center">
+                            
+                            <div class="card-body ">
+
+                                <p><b>{{c.product.name}}  </b><br><span id="price{{c.id}}"><b>  {{c.product.price}}</b></span></p>
+                                
+                                <div class="btn-group " role="group">
+                                    <button type="button" class="btn btn-dark" id="qtyde{{c.id}}">-</button>
+                                    <input type="text" value="{{c.qty}}" id="qty{{c.id}}" class="text-center inputsize" size="4" >
+                                    <button type="button" class="btn btn-dark" id="qtyin{{c.id}}">+</button>
+                                </div>
+                                <span class="text-end ms-5" id="update{{c.id}}"><i class="fa-solid fa-pen-to-square "></i></span>
+                                <button type="button" class="btn-close text-reset" id="del{{c.id}}" ></button>
+                                
+                                <p><b>Total: $</b> <span id="total{{c.id}}"></span> </p>
+                                
+                                
+
+                            </div>
+                            
+                            
+                        </div>  
+                        <script>
+                            
+                            sum=0 
+                            $(function() {
+                                $("#total{{c.id}}").text(($("#price{{c.id}}").text())*($('#qty{{c.id}}').val()))
+                                sum+= parseInt($("#total{{c.id}}").text())
+
+                                $("#total").text(sum)
+                            })
+
+                            $(function(){
+                                $("#del{{c.id}}").click(function(){
+                                    var id="{{c.id}}"
+                                    $.ajax({
+                                        url:"../deletefromcart",
+                                        data:{id:id},
+                                        success:function(res){
+                                            alert(res)
+                                            window.location.reload()
+
+                                        }
+                                    })
+
+                                })
+                                $('#update{{c.id}}').click(function(){
+                                    var id='{{c.id}}'
+                                    var qty=$("#qty{{c.id}}").val()
+                                    $.ajax({
+                                        url:'../updatecart',
+                                        data:{id:id,qty:qty},
+                                        success:function(res){
+                                            alert(res)
+                                            window.location.reload()
+                                        }
+                                    })
+                                })
+
+                            })
+                            $(function (){
+                                $('#qtyin{{c.id}}').click(function () {
+                                    let Qty = parseInt($('#qty{{c.id}}').val());
+                                    $('#qty{{c.id}}').val(Qty + 1);
+                                });
+
+
+                                $('#qtyde{{c.id}}').click(function () {
+                                    let Qty = parseInt($('#qty{{c.id}}').val());
+                                    if (Qty > 1){
+                                        $('#qty{{c.id}}').val(Qty - 1);
+                                    }
+                                });
+                            })
+                            
+                        </script> 
+                    {% endfor %} 
+                {% else %}
+                    <h1 class="text-center"><span><i class="fa-solid fa-cart-shopping"></i></span></h1>
+                    <h1 class="text-center">EMPTY</h1>
+                {% endif %}    
+            </div>
+        </div>
+        <div class="offcanvas-footer">
+            <div class="container">
+                <h4>Total:$<span >{{total}}</span></h4>
+                <h4>Shipping Charge:$<span>{{shipc}}</span></h4>
+                <h4 class="text-danger">Subtotal:$<span>{{net}}</span></h4>
+            </div>
+            <a href="../checkout"  class="btn btn-dark btn-lg btnsize" >Checkout</a>
+        </div>
+    </div>
+    <script>
+        function openNav() {
+            document.getElementById("sideCart").style.width = "500px";
+  
+        }
+       
+       
+    </script>
+    
+
+</div>
+<!-- End OF HEADER -->
+{% block 'content' %}
+
+
+
+{% endblock %}
+<div class="container-fluid bg-dark text-white p-5 ">
+    <a href="../" ><h1 data-aos="fade-right">CosmoBeauty</h1></a>
+    <h1 class="text-center" data-aos="fade-up"><i class="fa-brands fa-facebook p-3"></i>
+        <i class="fa-brands fa-instagram p-3"></i>
+        <i class="fa-brands fa-x-twitter p-3"></i>
+        <i class="fa-brands fa-pinterest-p p-3"></i>
+    </h1>
+</div>
+<script src="{% static 'js/bs.js' %}"></script>
+<script src="{% static 'js/aos.js' %}"></script>
+<script>
+    AOS.init({
+        duration: 1200,
+    });
+
+</script>
+
+</html>

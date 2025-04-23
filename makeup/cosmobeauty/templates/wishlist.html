@@ -1,0 +1,48 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block 'content' %}
+<div class="container mt-5 mb-5">
+  <h1 class="text-center">MY WISHLIST</h1>
+</div>
+<div class="container mb-5">
+  <div class="row">
+      {% if wish %}
+          {% for w in wish %}
+            <div class="card card1 col-lg-3 mb-3 me-3">
+                <input type="hidden" id="{{w.id}}">
+                <button type="button" class="btn-close text-reset " id="del{{w.id}}" ></button>
+                <a href="../product/{{w.product.id}}"><img src="{{w.product.img.url}}"  class="card-img-top imgfix text-center"></a>
+                <div class="card-body">
+                    <h4>{{w.product.name}}</h4>
+                    <b>$<span>{{w.product.price}}</span></b>
+                </div>
+            </div>
+            <script>
+                $(function(){
+                    $("#del{{w.id}}").click(function(){
+                        var id="{{w.id}}"
+                        $.ajax({
+                            url:"../delwishlist",
+                            data:{id:id},
+                            success:function(res){
+                                
+                                alert(res)
+                                window.location.reload()
+            
+                            }
+                        })
+            
+                    })
+                })
+            </script>
+          {% endfor %}
+      {% else %}
+          <div class="container">
+              <p class="text-center bagsize" ><i class="fa-regular fa-heart " ></i></p>
+              <h1 class="text-center">EMPTY</h1>
+          </div>
+      {% endif %}
+  </div>
+</div>
+
+{% endblock %}

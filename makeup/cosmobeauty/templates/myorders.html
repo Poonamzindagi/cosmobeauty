@@ -1,0 +1,34 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block 'content' %}
+<div class="container mt-5 mb-5">
+    <h1 class="text-center">MY ORDERS</h1>
+</div>
+<div class="container mb-5">
+    <div class="row">
+        
+        {% if myorders %}
+            {% for o in myorders %}
+            <div class="card card1 col-lg-3 mb-3 me-3">
+                <img src="{{o.product.img.url}}"  class="card-img-top imgfix text-center">
+                <div class="card-body">
+                    <h4>{{o.product.name}}</h4>
+                    <b>$<span>{{o.product.price}}</span></b>
+                    
+                </div>
+                <div class="overlay ">
+                    <span>Quantity: <b>{{o.qty}}</b></span><br>
+                    <span>Order:<b>{{o.orderdate}}</b></span>
+   
+                </div>   
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="container">
+                <p class="text-center bagsize" ><i class="fa-solid fa-bag-shopping " ></i></p>
+                <h1 class="text-center">EMPTY</h1>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

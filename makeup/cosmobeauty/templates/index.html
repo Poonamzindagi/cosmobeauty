@@ -1,0 +1,151 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block 'content' %}
+
+<!-- First part -->
+<div class="container mt-3">
+    <a href="#">
+        <div data-aos="fade-up" class="sec2">
+            <img src="{% static 'img/banner3.png' %}" class="imgsize">
+            <div class="text-center pro2 " data-aos="fade-up">
+                <p>
+                <h1> NEW COLLECTION </h1>
+                </p>
+            </div>
+        </div>
+    </a>
+
+
+</div>
+
+<div class="container mb-5">
+    <h1 class="text-center mb-5 mt-5" data-aos="fade-up"> Shop By Categories</h1>
+    <div class="row ">
+        {% for c in category %}
+        <div class="card card1  me-3" data-aos="fade-up">
+            <a href="../categories/{{c.id}}"><img src="{{c.img.url}}" class=" card-img-top "></a>
+            <div class="card-body">
+                <div><b>{{c.name}}</b></div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+<!-- Banner2 -->
+<div class="container mb-5">
+    <a href="#">
+        <div class="sec1 mb-5" data-aos="zoom-out">
+
+            <img src="{% static 'img/aplipstick.png' %}" class="imgsize">
+            <div class="pro" data-aos="fade-left"> <b>
+                    <h1>Lipsticks</h1>Six swatches display a range of lipstick shades <br>from deep burgundy to warm
+                    coral—highlighting the variety of tones and textures<br> available for different styles and skin
+                    tones.
+                </b>
+            </div>
+
+        </div>
+    </a>
+</div>
+<!-- End Banner2 -->
+<!-- RECOMMENEDED SECTION  -->
+<div class="container mb-5">
+    <h1 class="text-center mb-5" data-aos="fade-down">RECOMMENEDED</h1>
+    <div class="row ">
+        
+        {% for p in products %}
+        <div class="card card1 me-3 mb-3" data-aos="fade-up">
+
+            <a href="../product/{{p.id}}"><img src="{{p.img.url}}" class="card-img-top imgfix text-center"></a>
+            <div class="card-body">
+                <div>{{p.title}}</div>
+                <div>$<span>{{p.price}}</span></div>
+            </div>
+            <div class="overlay mb-2">
+                <span><b>{{p.name}}</b></span>
+                <div>$<span>{{p.price}}</span></div>
+                <div class="card-space">
+                    <span class="btn btn-dark btn-sm text-white" id="add{{p.id}}">Add to cart</span>
+                    
+                </div>
+            </div> 
+        </div>
+        <script>
+                                
+            $(function (){
+            
+                $('#add{{p.id}}').click(function (){
+                    var qty= 1
+                    var product='{{p.id}}'
+                    $.ajax({
+                        url: '../addtocart' ,
+                        data: {qty:qty,product:product} ,
+                        success: function(res){
+                            alert(res)
+                            window.location.reload()
+                        }
+        
+                    })
+                })
+            })
+        </script>
+        {% endfor %}
+        
+    </div>
+</div>
+<!-- End of recommended  -->
+
+<!-- Blog -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="{% static 'img/banner4.png' %}" class="banner4" data-aos="fade-right">
+        </div>
+        <div class="col-lg-6">
+            <div class="row">
+                
+                {% for t in trending %}
+                <div class="card card1 me-3 mb-3" data-aos="fade-left">
+
+                    <img src="{{t.img.url}}" class="card-img-top imgfix text-center">
+                    <div class="card-body">
+                        <div>{{t.title}}</div>
+                        <div>$<span>{{t.price}}</span></div>
+                    </div>
+                    <div class="overlay mb-2">
+                        <span><b>{{t.name}}</b></span>
+                        <div>$<span>{{t.price}}</span></div>
+                        <div class="card-space">
+                            <span class="btn btn-dark btn-sm text-white" id="new{{t.id}}">Add to cart</span>
+                            
+                        </div>
+                    </div> 
+                </div>
+                <script>
+                    $(function (){
+                        $('#new{{t.id}}').click(function (){
+                            var qty= 1
+                            var product='{{t.id}}'
+                            $.ajax({
+                                url: '../addtocart' ,
+                                data: {qty:qty,product:product} ,
+                                success: function(res){
+                                    alert(res)
+                                    window.location.reload()
+                                }
+                
+                            })
+                        })
+                    })
+                </script>
+
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

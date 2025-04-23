@@ -1,0 +1,19 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block 'content' %}
+<div class="container  text-center" >
+    <h1 class="m-5 ">Product Search</h1>
+</div>
+<div class=" container ">
+    <div class="text-center searchsize">
+        <div><input type="text" id="search-input" class="form-control "   placeholder="Search for products..." /></div>
+        <div><i class="fa-solid fa-magnifying-glass"></i></div>
+    </div>
+
+    <div id="product-list">
+        {% for s in search %}
+        <div class="product" data-name="{{s.product.name}}">{{s.product.name}}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block 'content' %}
+<div class="container banner mb-5">
+    <img src="{% static 'img/bann.png' %}"  class="container-fluid" data-aos="zoom-in">
+    {% for c in showcategory %}
+    <h1 class="text-center banneraligntext " data-aos="fade-up">{{c.name}}</h1>
+    {% endfor %}
+</div>
+
+
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-lg-3" data-aos="fade-right">
+            <h1>Categories</h1>
+            {% for c in category %}
+            <a href="../categories/{{c.id}}" class="txt"><p><b>{{c.name}}</b></p></a>
+            {% endfor %}
+        </div>
+        <div class="col-lg-9  ">
+            <div class="row ">
+    
+                {% for p in products %}
+                <div class="card card1 me-3 " data-aos="fade-left" >
+                    <a href="../product/{{p.id}}"><img src="{{p.img.url}}" class="card-img-top imgfix"></a>
+                    <div class="card-body ">
+                        <p class="card-text">{{p.name}}</p>
+                    </div>
+                    <div class="overlay mb-2">
+                        <span><b>{{p.name}}</b></span>
+                        <div>$<span>{{p.price}}</span></div>         
+                        <span class="btn btn-dark btn-sm text-white" id="add{{p.id}}">Add to cart</span>        
+                    </div>   
+                    
+                </div>  
+                <script>
+                    $(function (){
+                        $('#add{{p.id}}').click(function (){
+                            var qty= 1
+                            var product='{{p.id}}'
+                            $.ajax({
+                                url: '../addtocart' ,
+                                data: {qty:qty,product:product} ,
+                                success: function(res){
+                                    alert(res)
+                                    window.location.reload()
+                                }
+                
+                            })
+                        })
+                    })
+                </script>
+                  
+                {% endfor %}
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
