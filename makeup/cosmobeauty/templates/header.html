@@ -392,7 +392,7 @@
     <!-- Offcanvas -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="sideCart" aria-labelledby="sideCartLabel">
         <div class="offcanvas-header">
-            <h5 id="sideCartLabel">Cart</h5>
+            <h3 id="sideCartLabel">Cart</h3>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body">
@@ -478,7 +478,7 @@
                         </script> 
                     {% endfor %} 
                 {% else %}
-                    <h1 class="text-center"><span><i class="fa-solid fa-cart-shopping"></i></span></h1>
+                    <h1 class="text-center mt-5 pt-5"><span><i class="fa-solid fa-cart-shopping"></i></span></h1>
                     <h1 class="text-center">EMPTY</h1>
                 {% endif %}    
             </div>
@@ -489,7 +489,7 @@
                 <h4>Shipping Charge:$<span>{{shipc}}</span></h4>
                 <h4 class="text-danger">Subtotal:$<span>{{net}}</span></h4>
             </div>
-            <a href="../checkout"  class="btn btn-dark btn-lg btnsize" >Checkout</a>
+            <a href="../checkout"  class="btn btn-dark btn-lg btnsize mb-3" >Checkout</a>
         </div>
     </div>
     <script>
