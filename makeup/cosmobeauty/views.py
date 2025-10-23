@@ -17,9 +17,9 @@ def home(request):
         cart=Cart.objects.filter(user=request.user)
         total=0
         shipc=0
-        for c in cart:
+        for c in cart :
             total+=int(c.product.price)*int(c.qty)
-        if total>=1000 :
+        if total>=1000 or not cart :
             shipc=0
         else:
             shipc=100
@@ -80,7 +80,7 @@ def productdetails(request,id):
     
     for c in cart:
         total+=int(c.product.price)*int(c.qty)
-    if total>=1000:
+    if total>=1000  or not cart:
         shipc=0
     else:
         shipc=100
@@ -98,7 +98,7 @@ def category(request,id):
     shipc=0
     for c in cart:
         total+=int(c.product.price)*int(c.qty)
-    if total>=1000:
+    if total>=1000  or not cart:
         shipc=0
     else:
         shipc=100
@@ -173,7 +173,7 @@ def checkout(request):
     
     for c in cart:
         total+=int(c.product.price)*int(c.qty)
-    if total>=1000:
+    if total>=1000  or not cart:
         shipc=0
     else:
         shipc=100
@@ -249,7 +249,7 @@ def myorders(request):
         shipc=0
         for c in cart:
             total+=int(c.product.price)*int(c.qty)
-        if total>=1000:
+        if total>=1000  or not cart:
             shipc=0
         else:
             shipc=100
